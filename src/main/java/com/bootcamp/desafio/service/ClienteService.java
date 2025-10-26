@@ -19,4 +19,7 @@ public interface ClienteService {
 
     void delete(Integer id);
 
+    void findByEmail(ClienteDTO user);
+
+
 }

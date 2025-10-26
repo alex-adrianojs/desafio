@@ -10,6 +10,6 @@ import lombok.*;
 public class ClienteDTO {
 
     private Integer id;
-    private String name;
+    private String nome;
     private String email;
 }
