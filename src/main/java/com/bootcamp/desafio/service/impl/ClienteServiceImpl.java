@@ -28,11 +28,6 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public void findByNome(String nome) {
-
-    }
-
-    @Override
     public Cliente findById(Integer id) {
         Optional<Cliente> cliente = repository.findById(id);
         return cliente.orElseThrow(() -> new ObjectNotFoundException("Cliente não encontrado"));
@@ -50,11 +45,18 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public void findByEmail(ClienteDTO user){
-        Optional<Cliente> userEntity = repository.findByEmail(user.getEmail());
-        if(userEntity.isPresent() && !userEntity.get().getId().equals(user.getId())){
+    public void findByEmail(ClienteDTO cliente){
+        Optional<Cliente> clienteEntity = repository.findByEmail(cliente.getEmail());
+        if(clienteEntity.isPresent() && !clienteEntity.get().getId().equals(cliente.getId())){
             throw new DataIntegratyViolatedException("O e-mail informado já existe");
         }
+    }
+
+    @Override
+    public Cliente findByNome(String nome) {
+        Cliente clienteEntity = repository.findByNome(nome)
+                .orElseThrow(() -> new ObjectNotFoundException("Cliente não encontrado"));
+        return clienteEntity;
     }
 
     @Override

@@ -57,6 +57,11 @@ public class ClienteController {
         return  ResponseEntity.ok().body(mapper.map(service.update(cliente), ClienteDTO.class));
     }
 
+    @GetMapping(value = "nome/{nome}")
+    public ResponseEntity<ClienteDTO> findByNome(@PathVariable String nome){
+        return ResponseEntity.ok().body(mapper.map(service.findByNome(nome), ClienteDTO.class));
+
+    }
 
 
 }

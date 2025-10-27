@@ -9,8 +9,6 @@ public interface ClienteService {
 
     Cliente create(ClienteDTO cliente);
 
-    void findByNome(String nome);
-
     Cliente findById(Integer id);
 
     List<Cliente> findAll();
@@ -19,7 +17,9 @@ public interface ClienteService {
 
     void delete(Integer id);
 
-    void findByEmail(ClienteDTO user);
+    void findByEmail(ClienteDTO cliente);
+
+    Cliente findByNome(String nome);
 
 
 }
