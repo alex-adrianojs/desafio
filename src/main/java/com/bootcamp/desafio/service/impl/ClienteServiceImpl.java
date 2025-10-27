@@ -54,7 +54,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public List<Cliente>  findByNome(String nome) {
-        List<Cliente> clientes = repository.findByNameContainingIgnoreCase(nome);
+        List<Cliente> clientes = repository.findByNomeContainingIgnoreCase(nome);
         if (clientes.isEmpty()) {
             throw new ObjectNotFoundException("Nenhum cliente encontrado com o nome: " + nome);
         }
