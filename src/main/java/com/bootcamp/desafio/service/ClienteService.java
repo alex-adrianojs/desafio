@@ -19,7 +19,9 @@ public interface ClienteService {
 
     void findByEmail(ClienteDTO cliente);
 
-    Cliente findByNome(String nome);
+    List<Cliente>  findByNome(String nome);
+
+    long countClientes();
 
 
 }

@@ -58,9 +58,19 @@ public class ClienteController {
     }
 
     @GetMapping(value = "nome/{nome}")
-    public ResponseEntity<ClienteDTO> findByNome(@PathVariable String nome){
-        return ResponseEntity.ok().body(mapper.map(service.findByNome(nome), ClienteDTO.class));
+    public ResponseEntity<List<ClienteDTO>> findByNome(@PathVariable String nome){
+        List<Cliente> clientes = service.findByNome(nome);
+        List<ClienteDTO> clientesDTO = clientes.stream()
+                .map(c -> mapper.map(c, ClienteDTO.class))
+                .toList();
+        return ResponseEntity.ok(clientesDTO);
 
+    }
+
+    @GetMapping("/contar")
+    public ResponseEntity<Long> countClientes() {
+        long total = service.countClientes();
+        return ResponseEntity.ok(total);
     }
 
 

@@ -53,16 +53,23 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Cliente findByNome(String nome) {
-        Cliente clienteEntity = repository.findByNome(nome)
-                .orElseThrow(() -> new ObjectNotFoundException("Cliente não encontrado"));
-        return clienteEntity;
+    public List<Cliente>  findByNome(String nome) {
+        List<Cliente> clientes = repository.findByNameContainingIgnoreCase(nome);
+        if (clientes.isEmpty()) {
+            throw new ObjectNotFoundException("Nenhum cliente encontrado com o nome: " + nome);
+        }
+        return clientes;
     }
 
     @Override
     public Cliente update(ClienteDTO cliente) {
         findByEmail(cliente);
         return repository.save(mapper.map(cliente, Cliente.class));
+    }
+
+    @Override
+    public long countClientes() {
+        return repository.count();
     }
 
  }
